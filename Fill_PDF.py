@@ -6,7 +6,7 @@ import numpy as np
 from io import BytesIO
 
 # Specify the path to your Excel file
-excel_file_path = "excel_file_path"
+excel_file_path = r"C:\Users\NaradaJayasuriyaBIST\Desktop\Dev\Python 2\BBOX2\src\T10 test data.xlsx"
 
 # Read the Excel file into a Pandas DataFrame, skipping the first row (header row)
 df = pd.read_excel(excel_file_path, header=0)
@@ -27,7 +27,7 @@ df = df.mask(merged_cells)
 df.reset_index(drop=True, inplace=True)
 
 # Specify the indices of the columns to keep
-columns_to_keep = [0, 1, 2, 6, 7, 11, 12, 13]
+columns_to_keep = [0, 1, 2, 3, 4,5,6,7,8,9] 
 
 # Select the desired columns and exclude merged columns
 desired_frame = df.iloc[:, columns_to_keep]
@@ -36,7 +36,7 @@ desired_frame = df.iloc[:, columns_to_keep]
 row_datasets = [row for row in desired_frame.values]
 
 # Specify the path to the PDF file
-pdf_file_path = "pdf_file_path"
+pdf_file_path = r"C:\Users\NaradaJayasuriyaBIST\Desktop\Dev\Python 2\BBOX2\src\APIT_T10_2324_EST.pdf"
 
 # Open the PDF and select the first page
 pdf_document = fitz.open(pdf_file_path)
@@ -91,21 +91,23 @@ def save_image_as_pdf(image, row_data, output_directory, index):
 
     # Define coordinates for the text boxes
     textbox_coordinates = [
-        ((225, 282), (341, 299)),
-        ((191, 236), (523, 254)),
-        ((419, 283), (540, 299)),
-        ((398, 362), (557, 377)),
-        ((201, 404), (563, 419)),
-        ((366, 518), (556, 530)),
-        ((421, 530), (561, 543)),
-        ((377, 570), (562, 586))
+        ((519, 668), (1407, 712)),
+        ((634, 791), (915, 831)),
+        ((1163, 798), (1478, 836)),
+        ((822, 919), (1042, 952)),
+        ((1208, 921), (1381, 952)),
+        ((1106, 1016), (1538, 1054)),
+        ((560, 1131), (1228, 1171)),
+        ((1018, 1446), (1535, 1479)),
+        ((880, 1517), (1542, 1543)),
+        ((1048, 1596), (1541, 1636))
     ]
 
     # Define the order of text boxes and fill with corresponding row values
     for label, ((x1, y1), (x2, y2)), value in zip(textbox_order, textbox_coordinates, row_data):
         # Subtract 2 pixels from y1 and y2 to move the box 2 pixels up
-        y1 -= -12
-        y2 -= -12
+        y1 -= 0
+        y2 -= 0
 
         # Convert the value to a string
         if isinstance(value, float):
